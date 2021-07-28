@@ -36,7 +36,6 @@ justify-content: space-between;
 margin-bottom: 25px;
 `
 const StyledLink = styled(Link)`
-text-decoration: none;
 padding: 10px 15px;
  > .logo__container {
      height: 100%;
