@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import FormInput from './FormInput'
 import '../styles/sign-in.styles.scss'
+import CustomButton from './CustomButton'
 const SignIn = () => {
     const [formValues, setFormValues] = useState({
         email: '',
@@ -28,7 +29,7 @@ const SignIn = () => {
                     label='password'
                 />
 
-                <input type="submit" value="Submit form" />
+                <CustomButton type="submit" value="Submit form">Sign in</CustomButton>
             </form>
         </div>
     )
