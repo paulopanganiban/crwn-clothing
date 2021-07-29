@@ -3,7 +3,6 @@ import '../styles/custom-button.styles.scss'
 const CustomButton = ({children, ...otherProps}) => {
     return (
         <button className='custom-button' {...otherProps}>
-            
             {children}
         </button>
     )

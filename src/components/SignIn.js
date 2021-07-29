@@ -2,11 +2,21 @@ import React, { useState } from 'react'
 import FormInput from './FormInput'
 import '../styles/sign-in.styles.scss'
 import CustomButton from './CustomButton'
+import { auth, provider } from '../firebase'
 const SignIn = () => {
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
     })
+    const [isLoading, setIsLoading] = useState(false)
+    function signInWithGoogle(e) {
+        e.preventDefault()
+        setIsLoading(true)
+        auth.signInWithPopup(provider)
+        .then(result => {
+            setIsLoading(false)
+        })
+    }
     function onHandleChange(e) {
         const { value, name } = e.target
         // setState({[e.target.name]: e.target.value})
@@ -29,7 +39,8 @@ const SignIn = () => {
                     label='password'
                 />
 
-                <CustomButton type="submit" value="Submit form">Sign in</CustomButton>
+                <CustomButton type="submit" value="Submit form">Sign in</CustomButton>{' '}
+                <CustomButton disabled={isLoading} onClick={signInWithGoogle}>Sign in with Google</CustomButton>
             </form>
         </div>
     )
