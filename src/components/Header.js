@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/crown.svg' //react logo
-const Header = () => {
+import { auth } from '../firebase'
+const Header = ({ currentUser }) => {
     return (
         <HeaderContainer>
             <StyledLink to="/" className="logo__container">
@@ -15,6 +16,12 @@ const Header = () => {
                 <StyledLink to='/shop'>
                     CONTACT
                 </StyledLink>
+                {
+                    currentUser ? 
+                    <div onClick={() => auth.signOut()}>SIGN OUT</div>
+                    :
+                    <StyledLink to="/signin">SIGN IN</StyledLink>
+                }
             </HeaderOptions>
         </HeaderContainer>
     )
@@ -27,6 +34,9 @@ height: 100%;
 display: flex;
 align-items: center;
 justify-content: flex-end;
+ > div {
+     cursor: pointer;
+ }
 `
 const HeaderContainer = styled.div`
 height: 70px;

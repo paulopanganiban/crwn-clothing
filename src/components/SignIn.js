@@ -13,9 +13,9 @@ const SignIn = () => {
         e.preventDefault()
         setIsLoading(true)
         auth.signInWithPopup(provider)
-        .then(result => {
-            setIsLoading(false)
-        })
+            .then(result => {
+                setIsLoading(false)
+            })
     }
     function onHandleChange(e) {
         const { value, name } = e.target
@@ -38,9 +38,11 @@ const SignIn = () => {
                     handleChange={onHandleChange}
                     label='password'
                 />
+                <div className='buttons'>
+                    <CustomButton type="submit" value="Submit form">Sign in</CustomButton>{' '}
+                    <CustomButton disabled={isLoading} onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>
+                </div>
 
-                <CustomButton type="submit" value="Submit form">Sign in</CustomButton>{' '}
-                <CustomButton disabled={isLoading} onClick={signInWithGoogle}>Sign in with Google</CustomButton>
             </form>
         </div>
     )
