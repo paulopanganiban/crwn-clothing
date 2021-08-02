@@ -5,16 +5,21 @@ import Shop from './pages/Shop';
 import Header from './components/Header';
 import SignInSignUp from './pages/SignInSignUp';
 import { useEffect, useState } from 'react';
-import { auth } from './firebase';
+import { auth, createUserProfileDocument } from './firebase';
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   useEffect(() => {
-  auth.onAuthStateChanged(user => {
+  auth.onAuthStateChanged(async user => {
     if (user) {
-      setCurrentUser(user)
-      console.log(currentUser)
+      const userRef = await createUserProfileDocument(user)
+      userRef.onSnapshot(snapshot => {
+        setCurrentUser({
+          id: snapshot.id,
+          ...snapshot.data()
+        })
+      })
     } else {
-      // dispatch logout
+      setCurrentUser(user)
     }
    })
   }, [])

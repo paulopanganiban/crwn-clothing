@@ -22,8 +22,17 @@ const SignIn = () => {
         // setState({[e.target.name]: e.target.value})
         setFormValues({ [name]: value })
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
+        try {
+            await auth.signInWithEmailAndPassword(formValues.email, formValues.password)
+            setFormValues({
+                email: '',
+                password: '',
+            })
+        } catch (err) {
+            console.error(err)
+        }
     }
     return (
         <div className='sign-in'>
@@ -40,7 +49,7 @@ const SignIn = () => {
                 />
                 <div className='buttons'>
                     <CustomButton type="submit" value="Submit form">Sign in</CustomButton>{' '}
-                    <CustomButton disabled={isLoading} onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>
+                    <CustomButton type="button" disabled={isLoading} onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>
                 </div>
 
             </form>
