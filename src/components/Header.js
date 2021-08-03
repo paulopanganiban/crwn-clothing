@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/crown.svg' //react logo
 import { auth } from '../firebase'
+import { useSelector } from 'react-redux' // HOC modify our component related to redux
 const Header = ({ currentUser }) => {
+    
+  const testing = useSelector( (state) => state.user.currentUser)
     return (
         <HeaderContainer>
             <StyledLink to="/" className="logo__container">
@@ -17,7 +20,7 @@ const Header = ({ currentUser }) => {
                     CONTACT
                 </StyledLink>
                 {
-                    currentUser ? 
+                    testing ? 
                     <div onClick={() => auth.signOut()}>SIGN OUT</div>
                     :
                     <StyledLink to="/signin">SIGN IN</StyledLink>
@@ -26,7 +29,6 @@ const Header = ({ currentUser }) => {
         </HeaderContainer>
     )
 }
-
 export default Header
 const HeaderOptions = styled.div`
 width: 50%;
