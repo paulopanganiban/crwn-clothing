@@ -1,78 +1,158 @@
 import React, { useState } from 'react'
-import { auth, createUserProfileDocument } from '../firebase'
-import '../styles/sign-up.styles.scss'
-import CustomButton from './CustomButton'
-import FormInput from './FormInput'
-const SignUp = () => {
-    const initialState = {
-        displayName: '',
+import styled from 'styled-components'
+import { Button, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion'
+import { auth, createUserProfileDocument } from '../firebase';
+function SignUp() {
+    const [formValues, setFormValues] = useState({
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
-        confirmPassword: '',
+        password2: '',
+    })
+    const handleChange = (e) => {
+        const { value, name } = e.target
+        setFormValues({ ...formValues, [name]: value })
+        console.log(formValues)
     }
-    const [user, setUser] = useState(initialState)
     async function handleSubmit(e) {
         e.preventDefault()
-        const { displayName, email, password, confirmPassword } = user
-        if (password !== confirmPassword) {
-            alert("Passwords don't match")
-            return;
+        if (formValues.password !== formValues.password2) {
+            alert(`Passwords don't match`)
+            return
         }
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password)
-            await createUserProfileDocument(user, { displayName })
-            setUser(initialState)
-        } catch (error) {
-            console.error(error)
+            const { user } = await auth.createUserWithEmailAndPassword(formValues.email, formValues.password)
+          
+            await createUserProfileDocument(user, formValues.firstName)
+        } catch (err) {
+            console.error(err)
         }
     }
-    function handleChange(e) {
-        const { value, name } = e.target
-        // setState({[e.target.name]: e.target.value})
-        setUser({ [name]: value })
-        console.log(user)
-    }
+
+
     return (
-        <div className='sign-up'>
-            <h2 className="title">I do not have an account</h2>
-            <span>Sign up with your email and password</span>
-            <form className="sign-up-form" onSubmit={handleSubmit}>
-                <FormInput
-                    type='text'
-                    name='displayName'
-                    value={user.displayName}
-                    onChange={handleChange}
-                    label='Display name'
-                    required
-                ></FormInput>
-                <FormInput
-                    type='email'
-                    name='email'
-                    value={user.email}
-                    onChange={handleChange}
-                    label='Email'
-                    required
-                ></FormInput>
-                <FormInput
-                    type='password'
-                    name='password'
-                    value={user.password}
-                    onChange={handleChange}
-                    label='Password'
-                    required
-                ></FormInput>
-                <FormInput
-                    type='password'
-                    name='confirmPassword'
-                    value={user.confirmPassword}
-                    onChange={handleChange}
-                    label='Confirm Password'
-                    required
-                ></FormInput>
-                <CustomButton type='submit'>Sign up</CustomButton>
-            </form>
-        </div>
+        <SignInContainer
+            initial={{
+                marginTop: -999,
+            }}
+            animate={{
+                marginTop: 0,
+                opacity: 1,
+            }}
+        >
+            <h1>Create new account</h1>
+            <p>Use your email to create a new account</p>
+            <FormContainer>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        onChange={handleChange}
+                        name="firstName"
+                        value={formValues.firstName}
+                        className="form__textField"
+                        required
+                        id="outlined-required"
+                        label="First name"
+                        variant="outlined"
+                    />
+                    <TextField
+                        onChange={handleChange}
+                        name="lastName"
+                        value={formValues.lastName}
+                        className="form__textField"
+                        required
+                        id="outlined-required"
+                        label="Last name"
+                        variant="outlined"
+                    />
+                    <TextField
+                        onChange={handleChange}
+                        name="email"
+                        value={formValues.email}
+                        className="form__textField"
+                        type="email"
+                        required
+                        id="outlined-required"
+                        label="Email Address"
+                        variant="outlined"
+                    />
+                    <TextField
+                        onChange={handleChange}
+                        name="password"
+                        type="password"
+                        value={formValues.password}
+                        className="form__textField"
+                        required
+                        id="filled-password-input"
+                        label="Password"
+                        variant="outlined"
+                    />
+                    <TextField
+                        onChange={handleChange}
+                        name="password2"
+                        type="password"
+                        value={formValues.password2}
+                        className="form__textField"
+                        required
+                        id="filled-password-input"
+                        label="Password"
+                        variant="outlined"
+                    />
+                    <StyledButton className="form__button" variant="contained"
+                        type="submit"
+                    >
+                        SIGN UP NOW
+                    </StyledButton>
+                </form>
+            </FormContainer>
+            <div className="wrapper">
+                <p>Have an account? <Link to="/signin">Sign in</Link></p>
+            </div>
+        </SignInContainer>
     )
 }
 
 export default SignUp
+const FormContainer = styled.div`
+margin-top: 10px;
+ > p {
+     display: flex;
+     justify-content: center;
+     color: gray;
+ }
+ > form {
+     margin-top: 10px;
+     display: flex;
+     flex-direction: column;
+ }
+ > form > .form__textField {
+     margin-top: 10px;
+ }
+ > form > .form__button {
+     margin-top: 10px;
+ }
+ `
+const StyledButton = styled(Button)`
+`
+const ButtonsContainer = styled.div`
+margin-top: 20px;
+`
+const SignInContainer = styled(motion.div)`
+margin: auto;
+width: 50%;
+display: flex;
+flex-direction: column;
+min-width: 600px;
+ > p {
+     color: gray;
+     font-size: 15px;
+ }
+ > .wrapper {
+     margin-top: 10px;
+ }
+ > .wrapper > p {
+     color: gray;
+ }
+`

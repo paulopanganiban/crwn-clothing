@@ -9,6 +9,8 @@ import { auth, createUserProfileDocument } from './firebase';
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/userReducer'
 import { useSelector, useDispatch } from 'react-redux'
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -16,13 +18,14 @@ function App() {
       if (user) {
         const userRef = await createUserProfileDocument(user)
         userRef.onSnapshot(snapshot => {
-          setCurrentUser({
+          dispatch(setCurrentUser({
+             // dispatch({type: 'SET_CURRENT_USER', payload: user})
             id: snapshot.id,
             ...snapshot.data()
-          })
+          }))
         })
       } // end if
-      dispatch({type: 'SET_CURRENT_USER', payload: user})
+      // dispatch({type: 'SET_CURRENT_USER', payload: user})
     })
     return unsubscribe
   }, [])
@@ -33,7 +36,8 @@ function App() {
       <Switch>
         <Route exact path='/' component={Homepage} />
         <Route path='/shop' component={Shop} />
-        <Route path='/signin' component={SignInSignUp} />
+        <Route path='/signin' component={SignIn} />
+        <Route path='/signup' component={SignUp} />
       </Switch>
     </div>
   );
