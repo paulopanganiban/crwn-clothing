@@ -7,7 +7,7 @@ import SignInSignUp from './pages/SignInSignUp';
 import { useEffect } from 'react';
 import { auth, createUserProfileDocument } from './firebase';
 import { connect } from 'react-redux'
-import { setCurrentUser } from './redux/userReducer'
+import { setCurrentUser, signOutOfApp } from './redux/userReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
@@ -24,8 +24,9 @@ function App() {
             ...snapshot.data()
           }))
         })
-      } // end if
-      // dispatch({type: 'SET_CURRENT_USER', payload: user})
+      } else {
+        dispatch(signOutOfApp())
+      }
     })
     return unsubscribe
   }, [])

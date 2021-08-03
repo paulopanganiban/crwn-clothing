@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/crown.svg' //react logo
-import { auth } from '../firebase'
+import { auth, signOut } from '../firebase'
 import { useSelector } from 'react-redux' // HOC modify our component related to redux
 const Header = ({ currentUser }) => {
     
@@ -21,7 +21,7 @@ const Header = ({ currentUser }) => {
                 </StyledLink>
                 {
                     testing ? 
-                    <div onClick={() => auth.signOut()}>SIGN OUT</div>
+                    <div onClick={signOut}>SIGN OUT</div>
                     :
                     <StyledLink to="/signin">SIGN IN</StyledLink>
                 }

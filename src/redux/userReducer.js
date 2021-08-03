@@ -13,6 +13,11 @@ const userReducer = (state = initialState, action) => {
                 ...state, // everything else on the state so we use the ...spread
                 currentUser: action.payload,
             }
+        case 'NOT_LOGGED_IN':
+            return {
+                ...state,
+                currentUser: action.payload
+            }
 
         default:
             return state;
@@ -26,4 +31,8 @@ export default userReducer;
 export const setCurrentUser = user => ({
     type: 'SET_CURRENT_USER',
     payload: user
+})
+export const signOutOfApp = (user) => ({
+    type: 'NOT_LOGGED_IN',
+    payload: user // user is null here 
 })
