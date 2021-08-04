@@ -2,7 +2,11 @@ import React from 'react'
 import '../styles/collection-item.styles.scss'
 import { Button } from '@material-ui/core';
 import styled from 'styled-components'
-const CollectionItem = ({ id, name, price, imageUrl }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../redux/cartReducer';
+const CollectionItem = ({ item }) => {
+    const { name, price, imageUrl } = item
+    const dispatch = useDispatch()
     return (
         <div className="collection-item">
             <div className="image" style={{ backgroundImage: `url(${imageUrl})` }}>
@@ -12,7 +16,9 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
                 <span className="name">{name}</span>
                 <span className="price">Php {price}</span>
             </div>
-            <StyledButton style={{marginTop: -80,}}>Add to cart</StyledButton>
+            <StyledButton 
+            onClick={() => {dispatch(addItem(item))}}
+            style={{marginTop: -80,}}>Add to cart</StyledButton>
         </div>
     )
 }
