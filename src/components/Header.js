@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/crown.svg' //react logo
 import { auth, signOut } from '../firebase'
 import { useSelector } from 'react-redux' // HOC modify our component related to redux
-const Header = ({ currentUser }) => {
+import CartIcon from './CartIcon'
+const Header = () => {
     
   const testing = useSelector( (state) => state.user.currentUser)
     return (
@@ -25,6 +26,7 @@ const Header = ({ currentUser }) => {
                     :
                     <StyledLink to="/signin">SIGN IN</StyledLink>
                 }
+                <CartIcon/>
             </HeaderOptions>
         </HeaderContainer>
     )
