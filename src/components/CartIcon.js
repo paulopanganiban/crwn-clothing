@@ -4,11 +4,14 @@ import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import { useDispatch } from 'react-redux';
+import { toggleCart } from '../redux/cartReducer';
 const CartIcon = () => {
-    
+    const dispatch = useDispatch()
     return (
-        <IconButton aria-label="cart">
+        <IconButton aria-label="cart" className="cart-icon"
+        onClick={() => {dispatch(toggleCart())}}
+        >
         <StyledBadge badgeContent={0} color="primary" showZero>
           <ShoppingCartIcon />
         </StyledBadge>

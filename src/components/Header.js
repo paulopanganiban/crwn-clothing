@@ -5,13 +5,14 @@ import { ReactComponent as Logo } from '../assets/crown.svg' //react logo
 import { auth, signOut } from '../firebase'
 import { useSelector } from 'react-redux' // HOC modify our component related to redux
 import CartIcon from './CartIcon'
+import CartDropDown from './CartDropDown'
 const Header = () => {
-    
-  const testing = useSelector( (state) => state.user.currentUser)
+    const cartState = useSelector(state => state.cart.hidden)
+    const testing = useSelector((state) => state.user.currentUser)
     return (
         <HeaderContainer>
             <StyledLink to="/" className="logo__container">
-                <Logo/>
+                <Logo />
             </StyledLink>
             <HeaderOptions>
                 <StyledLink to='/shop'>
@@ -21,13 +22,16 @@ const Header = () => {
                     CONTACT
                 </StyledLink>
                 {
-                    testing ? 
-                    <div onClick={signOut}>SIGN OUT</div>
-                    :
-                    <StyledLink to="/signin">SIGN IN</StyledLink>
+                    testing ?
+                        <div onClick={signOut}>SIGN OUT</div>
+                        :
+                        <StyledLink to="/signin">SIGN IN</StyledLink>
                 }
-                <CartIcon/>
+                <CartIcon />
             </HeaderOptions>
+            {
+                !cartState ? ( <CartDropDown />) : (null)
+            }
         </HeaderContainer>
     )
 }
