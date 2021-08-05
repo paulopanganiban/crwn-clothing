@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/cartReducer';
+import { motion } from 'framer-motion'
 const CollectionItem = ({ item }) => {
     const { name, price, imageUrl } = item
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const CollectionItem = ({ item }) => {
                 <span className="price">Php {price}</span>
             </div>
             <StyledButton 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
             onClick={() => {dispatch(addItem(item))}}
             style={{marginTop: -80,}}>Add to cart</StyledButton>
         </div>
@@ -24,7 +27,7 @@ const CollectionItem = ({ item }) => {
 }
 
 export default CollectionItem
-const StyledButton = styled.button`
+const StyledButton = styled(motion.button)`
   background-color: black;
   width: 100px;
   padding: 2px;
