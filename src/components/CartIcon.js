@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart } from '../redux/cartReducer';
 const CartIcon = () => {
     const cartItems = useSelector(state => state.cart.cartItems)
+    // auto call. rerenders our component whenever the state changes ->
     const cartItemsTotal = cartItems.reduce((accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity, 0)
     const dispatch = useDispatch()
     
