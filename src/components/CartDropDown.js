@@ -4,8 +4,9 @@ import '../styles/cart-dropdown.styles.scss'
 import CartItem from './CartItem';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-const CartDropDown = () => {
+import { Link, withRouter } from 'react-router-dom'
+
+const CartDropDown = ({history}) => {
     const cartItems = useSelector(state => state.cart.cartItems)
     return (
         <motion.div className="cart-dropdown"
@@ -22,11 +23,9 @@ const CartDropDown = () => {
                 </div>) : (<span className="empty-message">Your cart is empty</span>)
 
             }
-            <Link to="/checkout"  className='button'>
-                <Button>Checkout</Button>
-            </Link>
+                <Button className="button" onClick={() => history.push('/checkout')}>Checkout</Button>
         </motion.div>
     )
 }
 
-export default CartDropDown
+export default withRouter(CartDropDown)
