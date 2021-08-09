@@ -20,6 +20,13 @@ const cartReducer = (state = initialState, action) => {
                 // state na natin then add action.payload
                 cartItems: addItemToCart(state.cartItems, action.payload)
             }
+        case 'CLEAR_ITEM_FROM_CART':
+            return {
+                ...state,
+                // if cartItem id matches, remove
+                cartItems: state.cartItems.filter(cartItem =>
+                    cartItem.id !== action.payload.id)
+            }
         default:
             return state
     }
@@ -31,5 +38,9 @@ export const toggleCart = () => ({
 })
 export const addItem = (item) => ({
     type: "ADD_ITEM",
+    payload: item,
+})
+export const clearItemFromCart = (item) => ({
+    type: "CLEAR_ITEM_FROM_CART",
     payload: item,
 })
