@@ -1,13 +1,13 @@
-[debug] [2021-08-15T15:02:21.174Z] ----------------------------------------------------------------------
-[debug] [2021-08-15T15:02:21.176Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\OLO\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2021-08-15T15:02:21.176Z] CLI Version:   9.16.5
-[debug] [2021-08-15T15:02:21.176Z] Platform:      win32
-[debug] [2021-08-15T15:02:21.176Z] Node Version:  v14.16.1
-[debug] [2021-08-15T15:02:21.178Z] Time:          Sun Aug 15 2021 23:02:21 GMT+0800 (Singapore Standard Time)
-[debug] [2021-08-15T15:02:21.178Z] ----------------------------------------------------------------------
+[debug] [2021-08-15T15:06:38.587Z] ----------------------------------------------------------------------
+[debug] [2021-08-15T15:06:38.590Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\OLO\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-08-15T15:06:38.590Z] CLI Version:   9.16.5
+[debug] [2021-08-15T15:06:38.590Z] Platform:      win32
+[debug] [2021-08-15T15:06:38.590Z] Node Version:  v14.16.1
+[debug] [2021-08-15T15:06:38.591Z] Time:          Sun Aug 15 2021 23:06:38 GMT+0800 (Singapore Standard Time)
+[debug] [2021-08-15T15:06:38.591Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2021-08-15T15:02:21.240Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2021-08-15T15:02:21.240Z] > authorizing via signed-in user (olopangs@gmail.com)
+[debug] [2021-08-15T15:06:38.655Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-08-15T15:06:38.655Z] > authorizing via signed-in user (olopangs@gmail.com)
 [info] 
      ######## #### ########  ######## ########     ###     ######  ########
      ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
