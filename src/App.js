@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import CheckoutPage from './pages/CheckoutPage'
+import Error from './components/Error';
 function App() {
   const history = useHistory()
   const dispatch = useDispatch()
@@ -44,6 +45,7 @@ function App() {
         <Route path='/signin' component={SignIn} />
         <Route path='/signup' component={SignUp} />
         <Route path='/checkout' component={CheckoutPage} />
+        <Route component={Error} />
       </Switch>
     </div>
   );
